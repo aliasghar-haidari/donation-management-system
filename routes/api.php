@@ -2,12 +2,20 @@
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
+use App\Http\Resources\User\UserResource;
+use App\Http\Controllers\Auth\AuthController;
+use App\Http\Controllers\User\UserController;
+use App\Http\Controllers\Donor\DonorController;
 
-Route::post('/signin', [\App\Http\Controllers\Auth\AuthController::class, 'signin']);
-Route::middleware('auth:sanctum')->post('/signout', [\App\Http\Controllers\Auth\AuthController::class, 'signout']);
+Route::post('/signin', [AuthController::class, 'signin']);
 
-Route::get('/user', function (Request $request) {
-    return $request->user();
-})->middleware('auth:sanctum');
+Route::middleware('auth:sanctum')->group(function () {
+    Route::post('/signout', [AuthController::class, 'signout']);
 
-Route::apiResource('users', \App\Http\Controllers\User\UserController::class);
+    Route::get('/user', function (Request $request) {
+        return new UserResource($request->user());
+    });
+
+    Route::apiResource('users', UserController::class);
+    Route::apiResource('donors', DonorController::class);
+});
