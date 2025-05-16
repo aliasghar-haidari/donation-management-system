@@ -15,6 +15,7 @@ class DatabaseSeeder extends Seeder
             \Database\Seeders\User\UserSeeder::class,
             \Database\Seeders\Donor\DonorSeeder::class,
             \Database\Seeders\Donor\DonationCauseSeeder::class,
+            \Database\Seeders\Currency\CurrencySeeder::class,
         ]);
     }
 }
