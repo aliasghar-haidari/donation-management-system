@@ -5,9 +5,9 @@ namespace Database\Factories\Donor;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
- * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Donor\DonationCategory>
+ * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Donor\DonationCause>
  */
-class DonationCategoryFactory extends Factory
+class DonationCauseFactory extends Factory
 {
     /**
      * Define the model's default state.
@@ -18,6 +18,7 @@ class DonationCategoryFactory extends Factory
     {
         return [
             'name' => $this->faker->randomElement(['Education', 'Healthcare', 'Disaster Relief']),
+            'description' => $this->faker->paragraph(3),
         ];
     }
 }

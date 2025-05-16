@@ -1,6 +1,6 @@
 <?php
 
-use App\Http\Controllers\Donor\DonationCategoryController;
+use App\Http\Controllers\Donor\DonationCauseController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Resources\User\UserResource;
@@ -19,5 +19,5 @@ Route::middleware('auth:sanctum')->group(function () {
 
     Route::apiResource('users', UserController::class);
     Route::apiResource('donors', DonorController::class);
-    Route::apiResource('donation-categories', DonationCategoryController::class);
+    Route::apiResource('donation-causes', DonationCauseController::class);
 });

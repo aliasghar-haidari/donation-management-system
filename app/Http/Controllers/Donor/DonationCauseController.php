@@ -3,69 +3,69 @@
 namespace App\Http\Controllers\Donor;
 
 use App\Http\Controllers\Controller;
-use App\Http\Requests\Donor\StoreDonationCategoryRequest;
-use App\Http\Requests\Donor\UpdateDonationCategoryRequest;
-use App\Http\Resources\Donor\DonationCategoryResource;
-use App\Models\Donor\DonationCategory;
+use App\Http\Requests\Donor\StoreDonationCauseRequest;
+use App\Http\Requests\Donor\UpdateDonationCauseRequest;
+use App\Http\Resources\Donor\DonationCauseResource;
+use App\Models\Donor\DonationCause;
 use Illuminate\Http\Request;
 
-class DonationCategoryController extends Controller
+class DonationCauseController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
     public function index(Request $request)
     {
-        $query = DonationCategory::query();
+        $query = DonationCause::query();
         $perPage = $request->perPage ?? 10;
         $sortBy = $request->sortBy ?? 'id';
         $sortOrder = $request->sortOrder ?? 'desc';
 
         $query->orderBy($sortBy, $sortOrder);
 
-        return DonationCategoryResource::collection($query->paginate($perPage));
+        return DonationCauseResource::collection($query->paginate($perPage));
     }
 
     /**
      * Store a newly created resource in storage.
      */
-    public function store(StoreDonationCategoryRequest $request)
+    public function store(StoreDonationCauseRequest $request)
     {
-        $donationCategory = DonationCategory::create($request->validated());
+        $donationCause = DonationCause::create($request->validated());
 
         return response()->json([
             'message' => 'Donation category created successfully.',
-            'data' => new DonationCategoryResource($donationCategory)
+            'data' => new DonationCauseResource($donationCause)
         ], 201);
     }
 
     /**
      * Display the specified resource.
      */
-    public function show(DonationCategory $donationCategory)
+    public function show(DonationCause $dDonationCause)
     {
-        return new DonationCategoryResource($donationCategory);
+        return new DonationCauseResource($dDonationCause);
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(UpdateDonationCategoryRequest $request, DonationCategory $donationCategory)
+    public function update(UpdateDonationCauseRequest $request, DonationCause $donationCause)
     {
-        $donationCategory->update($request->validated());
+        $donationCause->update($request->validated());
 
         return response()->json([
             'message' => 'Donation category updated successfully.',
-            'data' => new DonationCategoryResource($donationCategory)
+            'data' => new DonationCauseResource($donationCause)
         ]);
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(DonationCategory $donationCategory)
+    public function destroy(DonationCause $donationCause)
     {
-        $donationCategory->delete();
+        $donationCause->delete();
 
         return response()->json([
             'message' => 'Donation category deleted successfully.'

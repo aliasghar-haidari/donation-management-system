@@ -4,8 +4,9 @@ namespace App\Http\Requests\Donor;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class StoreDonationCategoryRequest extends FormRequest
+class UpdateDonationCauseRequest extends FormRequest
 {
+
     /**
      * Get the validation rules that apply to the request.
      *
@@ -15,6 +16,7 @@ class StoreDonationCategoryRequest extends FormRequest
     {
         return [
             'name' => 'required|string|max:50',
+            'description' => 'required|string',
         ];
     }
 }

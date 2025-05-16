@@ -14,7 +14,7 @@ class DatabaseSeeder extends Seeder
         $this->call([
             \Database\Seeders\User\UserSeeder::class,
             \Database\Seeders\Donor\DonorSeeder::class,
-            \Database\Seeders\Donor\DonationCategorySeeder::class,
+            \Database\Seeders\Donor\DonationCauseSeeder::class,
         ]);
     }
 }

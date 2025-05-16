@@ -2,22 +2,22 @@
 
 namespace Database\Seeders\Donor;
 
-use App\Models\Donor\DonationCategory;
+use App\Models\Donor\DonationCause;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
-class DonationCategorySeeder extends Seeder
+class DonationCauseSeeder extends Seeder
 {
     /**
      * Run the database seeds.
      */
     public function run(): void
     {
-        // Create 10 random donation categories using the factory
-        // DonationCategory::factory()->count(10)->create();
+        // Create 10 random donation causes using the factory
+        // DonationCause::factory()->count(10)->create();
 
-        // Create specific categories
-        $categories = [
+        // Create specific causes
+        $causes = [
             'Education',
             'Healthcare',
             'Disaster Relief',
@@ -30,8 +30,8 @@ class DonationCategorySeeder extends Seeder
             'Veteran Support'
         ];
 
-        foreach ($categories as $category) {
-            DonationCategory::firstOrCreate(['name' => $category]);
+        foreach ($causes as $cause) {
+            DonationCause::firstOrCreate(['name' => $cause]);
         }
     }
 }
