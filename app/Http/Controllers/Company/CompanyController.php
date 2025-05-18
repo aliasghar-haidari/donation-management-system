@@ -6,12 +6,18 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\Company\StoreCompanyRequest;
 use App\Http\Requests\Company\UpdateCompanyRequest;
 use App\Http\Resources\Company\CompanyResource;
+use App\Http\Services\Account\AccountService;
 use App\Models\Company\Company;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 
 class CompanyController extends Controller
 {
+    public function __construct(protected AccountService $accountService)
+    {
+        $this->accountService = $accountService;
+    }
+
     /**
      * Display a listing of the resource.
      */
@@ -34,6 +40,9 @@ class CompanyController extends Controller
     {
         $company = Company::create($request->validated());
         $company->load('currency');
+
+        // Create default accounts for the new company
+        $this->accountService->createDefaultAccounts($company);
 
         return response()->json([
             'message' => 'Company created successfully.',
