@@ -21,4 +21,6 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::patch('/currencies/{currency}/toggle', [\App\Http\Controllers\Currency\CurrencyController::class, 'toggle']);
 
     Route::apiResource('accounts', \App\Http\Controllers\Accounting\AccountController::class);
+
+    Route::apiResource('companies', \App\Http\Controllers\Company\CompanyController::class);
 });
