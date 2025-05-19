@@ -18,8 +18,8 @@ class CompanyResource extends JsonResource
             'mobile' => $this->mobile,
             'address' => $this->address,
             'currency' => new CurrencyResource($this->whenLoaded('currency')),
-            'created_at' => $this->created_at,
-            'updated_at' => $this->updated_at,
+            'created_at' => $this->created_at->toDateTimeString(),
+            'updated_at' => $this->updated_at->toDateTimeString(),
         ];
     }
 }
