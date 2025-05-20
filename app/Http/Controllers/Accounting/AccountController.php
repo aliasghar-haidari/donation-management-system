@@ -22,7 +22,7 @@ class AccountController extends Controller
 
         $perPage = $request->perPage ?? 10;
         $sortBy = $request->sortBy ?? 'id';
-        $sortOrder = $request->sortOrder ?? 'asc';
+        $sortOrder = $request->sortOrder ?? 'desc';
 
         $query->orderBy($sortBy, $sortOrder);
 

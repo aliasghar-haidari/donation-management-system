@@ -22,6 +22,6 @@ class UserSeeder extends Seeder
         ]);
 
         // Create 1000 random users using the UserFactory
-        User::factory()->count(1000)->create();
+        User::factory()->count(20)->create();
     }
 }

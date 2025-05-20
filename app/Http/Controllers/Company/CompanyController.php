@@ -42,7 +42,7 @@ class CompanyController extends Controller
         $company->load('currency');
 
         // Create default accounts for the new company
-        $this->accountService->createDefaultAccounts($company);
+        $this->accountService->createDefaultAccountsByCurrencyId($company->currency_id);
 
         return response()->json([
             'message' => 'Company created successfully.',

@@ -4,6 +4,8 @@ namespace App\Http\Controllers\Currency;
 
 use App\Http\Controllers\Controller;
 use App\Http\Resources\Currency\CurrencyResource;
+use App\Http\Services\Account\AccountService;
+use App\Models\Company\Company;
 use App\Models\Currency\Currency;
 use App\Http\Requests\Currency\StoreCurrencyRequest;
 use App\Http\Requests\Currency\UpdateCurrencyRequest;
@@ -12,6 +14,11 @@ use Illuminate\Http\Request;
 
 class CurrencyController extends Controller
 {
+    public function __construct(protected AccountService $accountService)
+    {
+        $this->accountService = $accountService;
+    }
+
     /**
      * Display a listing of the resource.
      */
@@ -74,15 +81,23 @@ class CurrencyController extends Controller
     }
 
     /**
-     * Toggle the active status of the currency.
+     * Activate the currency.
      */
-    public function toggle(Currency $currency): JsonResponse
+    public function activate(Currency $currency): JsonResponse
     {
-        $currency->is_active = !$currency->is_active;
+        if ($currency->is_active) {
+            return response()->json([
+                'message' => 'Currency is already activated.'
+            ], 400);
+        }
+
+        $currency->is_active = true;
         $currency->save();
 
+        $this->accountService->createDefaultAccountsByCurrencyId($currency->id);
+
         return response()->json([
-            'message' => 'Currency status updated successfully.',
+            'message' => 'Currency activated successfully.',
             'data' => new CurrencyResource($currency)
         ]);
     }

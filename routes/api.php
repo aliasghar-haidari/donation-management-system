@@ -18,7 +18,7 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::apiResource('donation-causes', \App\Http\Controllers\Donor\DonationCauseController::class);
 
     Route::apiResource('currencies', \App\Http\Controllers\Currency\CurrencyController::class);
-    Route::patch('/currencies/{currency}/toggle', [\App\Http\Controllers\Currency\CurrencyController::class, 'toggle']);
+    Route::patch('/currencies/{currency}/activate', [\App\Http\Controllers\Currency\CurrencyController::class, 'activate']);
 
     Route::apiResource('accounts', \App\Http\Controllers\Accounting\AccountController::class);
 
